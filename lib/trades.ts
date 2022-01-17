@@ -68,7 +68,7 @@ export class AggTrades {
     return this.aggTradesToReport(aggTrades);
   }
   
-  private aggTradesToReport(aggTrades: AggTrade[], isHigh = true): Report {
+  private aggTradesToReport(aggTrades: any[], isHigh = true): Report {
     const res: Report = {
       price: {
         min: null,
