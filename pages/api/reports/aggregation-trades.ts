@@ -12,8 +12,8 @@ export default async function aggregationTrades(
   switch (httpMethod) {
     case "GET":
       const { from: fromArr, to: toArr } = req.query;
-      const from = typeof fromArr === "string" ? fromArr : fromArr[0];
-      const to = typeof toArr === "string" ? toArr : toArr[0]; 
+      const from = typeof fromArr === "string" ? fromArr : undefined;
+      const to = typeof toArr === "string" ? toArr : undefined; 
       const data = await aggTrades.getReport(from, to);
       res.status(200).json(data);
       break;
