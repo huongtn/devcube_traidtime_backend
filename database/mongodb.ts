@@ -1,3 +1,4 @@
+import console from "console";
 import { InsertManyResult, MongoClient, MongoClientOptions } from "mongodb";
 import { Logger } from "pino";
 
@@ -111,10 +112,10 @@ export class MongoDBHelper {
   }
 
   getMatchCondition(fromTime?, toTime?) {
-    if (fromTime && !toTime) return { $gte: new Date(fromTime) };
-    else if (!fromTime && toTime) return { $lte: new Date(toTime) };
+    if (fromTime && !toTime) return {tradeTime:{ $gte: fromTime }};
+    else if (!fromTime && toTime) return {tradeTime:{ $lte: toTime }};
     else if (fromTime && toTime)
-      return { $gte: new Date(fromTime), $lte: new Date(toTime) };
+      return {tradeTime:{ $gte: fromTime, $lte: toTime }};
     return {};
   }
 
@@ -123,7 +124,8 @@ export class MongoDBHelper {
       .db(this.dbName)
       .collection(aggregationTradesTableName);
     let condition = this.getMatchCondition(fromTime, toTime);  
-    return await aggregationTradesColl.find({}).toArray();
+    console.log(JSON.stringify(condition));
+    return await aggregationTradesColl.find(condition).toArray();
   }
 
   async getVolatilityByType(type, count) {
@@ -146,9 +148,7 @@ export class MongoDBHelper {
     let condition = this.getMatchCondition(fromTime, toTime);
     const pipeline = [
       {
-        $match: {
-          eventTime: condition,
-        },
+        $match:  condition,
       },
       {
         $group: {
