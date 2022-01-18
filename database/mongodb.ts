@@ -112,10 +112,10 @@ export class MongoDBHelper {
   }
 
   getMatchCondition(fromTime?, toTime?) {
-    if (fromTime && !toTime) return {tradeTime:{ $gte: fromTime }};
-    else if (!fromTime && toTime) return {tradeTime:{ $lte: toTime }};
+    if (fromTime && !toTime) return {eventTime:{ $gte: fromTime }};
+    else if (!fromTime && toTime) return {eventTime:{ $lte: toTime }};
     else if (fromTime && toTime)
-      return {tradeTime:{ $gte: fromTime, $lte: toTime }};
+      return {eventTime:{ $gte: fromTime, $lte: toTime }};
     return {};
   }
 
@@ -124,6 +124,7 @@ export class MongoDBHelper {
       .db(this.dbName)
       .collection(aggregationTradesTableName);
     let condition = this.getMatchCondition(fromTime, toTime);   
+    console.log(JSON.stringify(condition));
     return await aggregationTradesColl.find(condition).toArray();
   }
 
