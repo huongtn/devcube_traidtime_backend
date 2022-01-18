@@ -1,4 +1,4 @@
-import console from "console";
+ 
 import { InsertManyResult, MongoClient, MongoClientOptions } from "mongodb";
 import { Logger } from "pino";
 
@@ -123,8 +123,7 @@ export class MongoDBHelper {
     const aggregationTradesColl = this.client
       .db(this.dbName)
       .collection(aggregationTradesTableName);
-    let condition = this.getMatchCondition(fromTime, toTime);  
-    console.log(JSON.stringify(condition));
+    let condition = this.getMatchCondition(fromTime, toTime);   
     return await aggregationTradesColl.find(condition).toArray();
   }
 
