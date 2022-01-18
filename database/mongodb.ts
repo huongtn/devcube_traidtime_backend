@@ -123,7 +123,7 @@ export class MongoDBHelper {
       .db(this.dbName)
       .collection(aggregationTradesTableName);
     let condition = this.getMatchCondition(fromTime, toTime);  
-    return await aggregationTradesColl.find({ eventTime: condition }).toArray();
+    return await aggregationTradesColl.find({}).toArray();
   }
 
   async getVolatilityByType(type, count) {
