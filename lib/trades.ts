@@ -87,11 +87,11 @@ export class AggTrades {
     };
     for (const item of aggTrades) {
       if (item.isBuyerMaker) {
-        res.buy.quantity += item.quantity;
-        res.buy.totalPrice += item.tradeWorth;
+        res.buy.quantity += Number(item.quantity);
+        res.buy.totalPrice += Number(item.tradeWorth);
       } else {
-        res.sell.quantity += item.quantity;
-        res.sell.totalPrice += item.tradeWorth;
+        res.sell.quantity += Number(item.quantity);
+        res.sell.totalPrice += Number(item.tradeWorth);
       }
 
       if (res.price.min) {
