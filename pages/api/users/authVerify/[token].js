@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import Cookies from 'cookies';
 
 import dbConnect from '../../../../utils/dbConnect';
-import User from '../../../../models/userModel';
+import dbContext from '../../../../models/dbContext';
 
 dbConnect();
 
@@ -29,7 +29,7 @@ const handler = async (req, res) => {
   // Get user based on token
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
 
-  const user = await User.findOne({
+  const user = await dbContext.User.findOne({
     authLoginToken: hashedToken,
     authLoginExpires: { $gt: Date.now() },
   });
