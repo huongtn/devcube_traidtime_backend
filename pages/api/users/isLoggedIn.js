@@ -2,14 +2,14 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import Cookies from 'cookies';
 import { promisify } from 'util';
-
+const { publicRuntimeConfig: config } = getConfig()
 import dbConnect from '../../../utils/dbConnect';
 import User from '../../../models/dbContext'; 
 
 dbConnect();
 
 const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id }, config.jwt_token, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };

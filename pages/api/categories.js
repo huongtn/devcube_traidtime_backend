@@ -13,18 +13,19 @@ const handler = async (req, res) => {
         message: 'Saving successful!',
       });
     case "GET": 
+      console.log("comming")
       if (!id) {
-        const products = await dbContext.Category.find({});
+        const categories = await dbContext.Category.find({});
         return res
           .status(200)
-          .json(products);
+          .json(categories);
       }
       else
       {
-        const product = await dbContext.Category.findById(id);
+        const category = await dbContext.Category.findById(id);
         return res
           .status(200)
-          .json(product);
+          .json(category);
       }
     case "DELETE":
       await dbContext.Category.deleteOne({ _id: id });

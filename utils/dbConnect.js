@@ -1,14 +1,18 @@
 import mongoose from 'mongoose';
-
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
+ 
 async function dbConnect() {
   // check if we have a connection to the database or if it's currently
   // connecting or disconnecting (readyState 1, 2 and 3)
+  console.log("readyState=>"+mongoose.connection.readyState)
   if (mongoose.connection.readyState >= 1) {
+   
     return;
   }
 
   return mongoose
-    .connect(process.env.DATABASE, {
+    .connect(config.database, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,

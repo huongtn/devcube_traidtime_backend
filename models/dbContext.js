@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 const userSchema =   require('./user')(mongoose); 
-const purchaseSchema =  require('./purchase')(mongoose); 
 const categorySchema =  require('./category')(mongoose);  
 const productSchema =  require('./product')(mongoose);  
+const companySchema =  require('./company')(mongoose)
+const orderSchema =  require('./order')(mongoose)
 
 const User  = mongoose.models.User || mongoose.model('User', userSchema);
 const Product =  mongoose.models.Product || mongoose.model('Product', productSchema);
 const Category = mongoose.models.Category || mongoose.model('Category', categorySchema); 
-const Purchase = mongoose.models.Purchase || mongoose.model('Purchase', purchaseSchema); 
-module.exports =  {User,Product,Purchase,Category}; 
+const Company = mongoose.models.Company || mongoose.model('Company', companySchema); 
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema); 
+module.exports =  {User,Product,Category,Company,Order}; 
 
 //Populate relational fields
 // purchaseSchema.pre(/^find/, function (next) {

@@ -30,14 +30,20 @@ module.exports = (mongoose) => {
         lowercase: true,
         validate: [validator.isEmail],
       },
+      phoneNumber: {
+        type: String
+      },
+      code: {
+        type: String
+      },
       photo: {
         type: String,
         default: 'default-user.jpg',
       },
       role: {
         type: String,
-        enum: ['user', 'editor', 'admin', 'pro'],
-        default: 'user',
+        enum: ['Superadmin', 'Finances', 'Warehouse', 'Supplier','Salesman','Customer'],
+        default: 'Customer',
       },
       customerId: {
         type: String,
@@ -56,6 +62,15 @@ module.exports = (mongoose) => {
         select: false,
       },
       refreshTokens: [refreshToken],
+      address: {
+        type: String
+      }, 
+      lat: {
+        type: Number
+      }, 
+      lng: {
+        type: Number
+      }, 
     },
     { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
   );

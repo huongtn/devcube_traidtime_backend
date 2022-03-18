@@ -1,30 +1,31 @@
 //const mongoose = require('mongoose');
-module.exports =(mongoose) =>
-{
-  var productSchema  = new mongoose.Schema(
+module.exports = (mongoose) => {
+  var productSchema = new mongoose.Schema(
     {
       category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
         required: [true, 'Category is required'],
       },
+      company: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company',
+        required: [true, 'Company is required'],
+      },
       title: {
         type: String,
         required: [true, 'Title is required'],
       },
-      amount: {
+      price: {
         type: Number,
-        required: [true, 'Amount is required'],
+        required: [true, 'Price is required'],
       },
-      stripeId: {
-        type: String,
-        required: [true, 'Stripe ID is required'],
-      },
+      stock: {
+        type: Number,
+        required: [true, 'Stock is required'],
+      }
     },
     { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
   );
   return productSchema;
-} 
-
-// module.exports =
-//   mongoose.models.Product || mongoose.model('Product', productSchema);
+}
